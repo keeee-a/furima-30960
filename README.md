@@ -13,45 +13,47 @@
 |birthday            |date         |null:false                 |
 
 ### Association
-has_one :street_address
 has_many :products
 has_many :purchases
 
 
 ## products テーブル
-|Column               |Type            |Options       |
-|---------------------|----------------|--------------|
-|name                 |string          |null:false    |
-|category_id          |integer         |null:false    |
-|price                |integer         |null:false    |
-|explanation          |text            |null:false    |
-|product_condition_id |integer         |null:false    |
-|burden_shipping_id   |integer         |null:false    |
-|shipping_area_id     |integer         |null:false    |
-|days_to_ship_id      |integer         |null:false    |
-|user_id              |integer         |null:false    |
+|Column               |Type            |Options                          |
+|---------------------|----------------|---------------------------------|
+|name                 |string          |null:false                       |
+|category_id          |integer         |null:false                       |
+|price                |integer         |null:false                       |
+|explanation          |text            |null:false                       |
+|product_condition_id |integer         |null:false                       |
+|burden_shipping_id   |integer         |null:false                       |
+|shipping_area_id     |integer         |null:false                       |
+|days_to_ship_id      |integer         |null:false                       |
+|user                 |references      |null:false, foreign_key: true    |
 
 ### Association
 belongs_to :user
 has_one :purchase
 
 ## purchases テーブル
-|Column               |Type            |Options           |
-|---------------------|----------------|------------------|
-|user_id              |integer         |null:false        |
-|product_id           |integer         |null:false        |
+|Column               |Type            |Options                             |
+|---------------------|----------------|------------------------------------|
+|user                 |references      |null:false, foreign_key: true       |
+|product              |references      |null:false, foreign_key: true       |
 
 ### Association
 belongs_to :product
 belongs_to :user
-
+has_one :street_address
 
 ## street_addresses テーブル
-|Column               |Type            |                   |
-|---------------------|----------------|-------------------|
-|postal_code          |integer         |null:false         |
-|prefecture_id        |integer         |null:false         |
-|city                 |string          |null:false         |
-|address              |string          |null:false 
+|Column               |Type            |                              |
+|---------------------|----------------|------------------------------|
+|postal_code          |integer         |null:false                    |
+|prefecture_id        |integer         |null:false                    |
+|city                 |string          |null:false                    |
+|address              |string          |null:false                    |
+|building             |string          |                              |
+|phone_number         |integer         |null:false                    |
+|purchase             |references      |null:false, foreign_key: true |
 
-
+belongs_to :purchase
