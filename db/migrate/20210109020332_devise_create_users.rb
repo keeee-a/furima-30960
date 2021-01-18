@@ -10,6 +10,12 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
+      t.string :first_name
+      t.string :last_name
+      t.string :first_name_kana
+      t.string :last_name_kana
+      t.string :nickname
+      t.date :birthday
 
       ## Rememberable
       t.datetime :remember_created_at
