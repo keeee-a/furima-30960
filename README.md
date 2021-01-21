@@ -17,7 +17,7 @@ has_many :products
 has_many :purchases
 
 
-## products テーブル
+## items テーブル
 |Column               |Type            |Options                          |
 |---------------------|----------------|---------------------------------|
 |name                 |string          |null:false                       |
