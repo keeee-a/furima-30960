@@ -12,7 +12,7 @@ class User < ApplicationRecord
     validates :nickname
     validates :birthday
   end
-  with_options format: {with: /\A[ぁ-んァ-ン一-龥]/} do
+  with_options format: {with: /\A[ぁ-んァ-ン一-龥々]/} do
     validates :first_name
     validates :last_name
   end
