@@ -1,14 +1,12 @@
-function salesCommission() {
+function salesCommissionAndSalesProfit() {
   const ItemYen = document.getElementById("item-price")
-  console.log(ItemYen)
   const addTaxPrice = document.getElementById("add-tax-price")
-  console.log(addTaxPrice)
-  console.log(ItemYen.innerHTML)
+  const profit = document.getElementById("profit")
   ItemYen.addEventListener('change', function(){
-    console.log(ItemYen.value)
   addTaxPrice.innerHTML = ItemYen.value * 0.1
+  profit.innerHTML = ItemYen.value - addTaxPrice.innerHTML
   })
 
 }
 
-window.addEventListener('load', salesCommission)
+window.addEventListener('load', salesCommissionAndSalesProfit)
