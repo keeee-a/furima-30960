@@ -3,7 +3,17 @@ class Item < ApplicationRecord
   has_one_attached :image
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
-  validates :category_id, numericality: { other_than: 1 }
   belongs_to :product_condition
-  validates :product_condition_id, numericality: { other_than: 1 }
+  with_options null:false do
+    validates :name
+    validates :price
+    validates :explanation
+    with_options numericality: { other_than: 1 } do
+      validates :category_id
+      validates :product_condition_id
+      validates :burden_shipping_id
+      validates :shipping_area_id
+      validates :days_to_ship_id
+    end
+  end
 end
