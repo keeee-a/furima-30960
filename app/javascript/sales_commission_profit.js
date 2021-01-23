@@ -3,7 +3,7 @@ function salesCommissionAndSalesProfit() {
   const addTaxPrice = document.getElementById("add-tax-price")
   const profit = document.getElementById("profit")
   ItemYen.addEventListener('change', function(){
-  addTaxPrice.innerHTML = ItemYen.value * 0.1
+  addTaxPrice.innerHTML = Math.floor(ItemYen.value * 0.1)
   profit.innerHTML = ItemYen.value - addTaxPrice.innerHTML
   })
 

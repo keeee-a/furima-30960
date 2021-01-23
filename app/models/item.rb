@@ -4,7 +4,7 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :product_condition
-  with_options null:false do
+  with_options presence: true do
     validates :name
     validates :price
     validates :explanation
@@ -17,4 +17,14 @@ class Item < ApplicationRecord
     end
   end
   validates :price, numericality: {greater_than: 300, less_than: 9999999}, format: {with: /\A[0-9]+\z/}
+  validate :image_attached?
+
+  private
+  
+  def image_attached?
+    if !image.attached?
+      image.purge
+      errors.add(:image, 'は必須です')
+    end
+  end
 end
