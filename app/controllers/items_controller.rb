@@ -1,9 +1,8 @@
 class ItemsController < ApplicationController
-  
   def index
-    @items = Item.all.order(created_at: "DESC")
+    @items = Item.all.order(created_at: 'DESC')
   end
-  
+
   def new
     authenticate_user!
     @item = Item.new
@@ -14,13 +13,14 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to items_path
     else
-      render "new"
+      render 'new'
     end
   end
 
   private
-  
+
   def item_params
-    params.require(:item).permit(:name, :category_id, :price, :explanation, :product_condition_id, :burden_shipping_id, :shipping_area_id, :days_to_ship_id, :image).merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :category_id, :price, :explanation, :product_condition_id, :burden_shipping_id,
+                                 :shipping_area_id, :days_to_ship_id, :image).merge(user_id: current_user.id)
   end
 end

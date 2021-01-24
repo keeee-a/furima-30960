@@ -12,15 +12,14 @@ class User < ApplicationRecord
     validates :nickname
     validates :birthday
   end
-  with_options format: {with: /\A[ぁ-んァ-ン一-龥々]/} do
+  with_options format: { with: /\A[ぁ-んァ-ン一-龥々]/ } do
     validates :first_name
     validates :last_name
   end
-  with_options format: {with: /\A[ァ-ヶー－]+\z/} do
+  with_options format: { with: /\A[ァ-ヶー－]+\z/ } do
     validates :first_name_kana
     validates :last_name_kana
   end
-  validates :password, format: {with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i }
-  validates :password_confirmation, format: {with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i }
+  validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i }
+  validates :password_confirmation, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i }
 end
-
