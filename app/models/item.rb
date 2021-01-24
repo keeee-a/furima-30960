@@ -16,7 +16,7 @@ class Item < ApplicationRecord
       validates :days_to_ship_id
     end
   end
-  validates :price, numericality: {greater_than: 300, less_than: 9999999}, format: {with: /\A[0-9]+\z/}
+  validates :price, numericality: {greater_than: 299, less_than: 10000000}, format: {with: /\A[0-9]+\z/}
   validate :image_attached?
 
   private

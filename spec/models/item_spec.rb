@@ -55,12 +55,12 @@ RSpec.describe Item, type: :model do
       it "価格が¥300未満だと保存できない" do
         @item.price = 299 
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be greater than 300")
+        expect(@item.errors.full_messages).to include("Price must be greater than 299")
       end
       it "価格が¥10000000以上だと保存できない" do
         @item.price = 10000000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be less than 9999999")
+        expect(@item.errors.full_messages).to include("Price must be less than 10000000")
       end
       it "販売価格は半角数字でなければ保存できない" do
         @item.price = "abcde"
@@ -79,8 +79,12 @@ RSpec.describe Item, type: :model do
       end
     end
     context "新規出品登録できる時" do
-      it "価格が¥300~¥9,999,999の範囲であれば保存できる" do
-        @item.price = 5000
+      it "価格が¥300~¥9,999,999の範囲であれば保存できる(1)" do
+        @item.price = 300
+        expect(@item).to be_valid
+      end
+      it "価格が¥300~¥9,999,999の範囲であれば保存できる(2)" do
+        @item.price = 9999999
         expect(@item).to be_valid
       end
       it "販売価格は半角数字であれば保存できる" do
