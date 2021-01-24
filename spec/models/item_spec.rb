@@ -67,6 +67,16 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not a number")
       end
+      it "全角文字では登録できない" do
+        @item.price = "１２３４５"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+      it "半角英数混合では登録できない" do
+        @item.price = "1234abcd"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
     end
     context "新規出品登録できる時" do
       it "価格が¥300~¥9,999,999の範囲であれば保存できる" do
