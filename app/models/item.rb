@@ -16,13 +16,13 @@ class Item < ApplicationRecord
       validates :days_to_ship_id
     end
   end
-  validates :price, numericality: { greater_than: 299, less_than: 10_000_000 }, format: { with: /\A[0-9]+\z/ }
+  validates :price, numericality: {greater_than: 299, less_than: 10000000}, format: {with: /\A[0-9]+\z/}
   validate :image_attached?
 
   private
-
+  
   def image_attached?
-    unless image.attached?
+    if !image.attached?
       image.purge
       errors.add(:image, 'は必須です')
     end
