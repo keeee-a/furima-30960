@@ -4,6 +4,9 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :product_condition
+  belongs_to :burden_shipping
+  belongs_to :shipping_area
+  belongs_to :days_to_ship
   with_options presence: true do
     validates :name
     validates :price
