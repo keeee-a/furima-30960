@@ -1,11 +1,11 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update]
+  before_action :check_login, only: [:new, :edit]
   def index
     @items = Item.all.order(created_at: "DESC")
   end
   
   def new
-    authenticate_user!
     @item = Item.new
   end
 
@@ -22,7 +22,6 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    authenticate_user!
     unless current_user.id == @item.user.id
       redirect_to action: :index
     end
@@ -44,5 +43,9 @@ class ItemsController < ApplicationController
 
   def set_item 
     @item = Item.find(params[:id])
+  end
+
+  def check_login
+    authenticate_user!
   end
 end
