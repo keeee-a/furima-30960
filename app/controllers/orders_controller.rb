@@ -6,7 +6,6 @@ class OrdersController < ApplicationController
 
   def create
     @form = Form.new(form_params)
-    binding.pry
     if @form.valid?
       @form.save
       redirect_to controller: :items, action: :index
