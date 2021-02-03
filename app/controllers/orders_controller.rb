@@ -1,6 +1,8 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, only: [:index]
   def index
     set_item
+    my_product?
     @form = Form.new
   end
 
@@ -24,5 +26,10 @@ class OrdersController < ApplicationController
   def set_item 
     @item = Item.find(params[:item_id])
   end
+
+  def my_product?
+    unless @item.id == current_user.id
+      redirect_to controller: :items, action: :index
+    end
 
 end
