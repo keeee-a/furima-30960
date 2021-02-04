@@ -28,8 +28,9 @@ class OrdersController < ApplicationController
   end
 
   def my_product?
-    unless @item.id == current_user.id
+    if @item.id == current_user.id
       redirect_to controller: :items, action: :index
     end
+  end
 
 end
