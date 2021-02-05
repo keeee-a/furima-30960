@@ -1,6 +1,6 @@
 class Form
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :address, :building, :phone_number, :token, :price
+  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :address, :building, :phone_number
 
   with_options presence: true do
     #with_options foreign_key: true do
@@ -12,7 +12,6 @@ class Form
     validates :city
     validates :address
     validates :phone_number
-    validates :token
   end
 
   def save
