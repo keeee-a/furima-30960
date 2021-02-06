@@ -7,7 +7,7 @@ class Form
     validates :prefecture_id, numericality: { other_than: 1 }
     validates :city, format: {with: /\A[ぁ-んァ-ン一-龥々]/}
     validates :address, format: {with: /\A[ぁ-んァ-ン一-龥々1-9]/}
-    validates :phone_number, format: {with: /\A[0-9]+\z/}
+    validates :phone_number, format: {with: /\A[0-9]+\z/}, length: {maximum: 11}
     validates :token
   end
 

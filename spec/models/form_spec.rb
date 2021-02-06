@@ -11,6 +11,11 @@ RSpec.describe Form, type: :model do
       @form.valid?
       expect(@form.errors.full_messages).to include("Postal code can't be blank")
     end
+    it "郵便番号にはハイフンが必要であること" do
+      @form.postal_code = "0123456"
+      @form.valid?
+      expect(@form.errors.full_messages).to include("Postal code is invalid")
+    end
     it "都道府県の情報がないと保存できない" do
       @form.prefecture_id = nil
       @form.valid?
@@ -52,6 +57,11 @@ RSpec.describe Form, type: :model do
       @form.valid?
       expect(@form.errors.full_messages).to include("Phone number is invalid")
     end
+    it "電話番号は十一桁以内でないと保存できない" do
+      @form.phone_number = "090123456789"
+      @form.valid?
+      expect(@form.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+    end
 
   end
 
@@ -77,6 +87,10 @@ RSpec.describe Form, type: :model do
     end
     it "電話番号が全て半角数字なら保存できる" do
       @form.phone_number = "87654321090"
+      expect(@form).to be_valid
+    end
+    it "電話番号が十一桁以内であれば保存できる" do
+      @form.phone_number = "09012345678"
       expect(@form).to be_valid
     end
   end
