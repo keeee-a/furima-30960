@@ -3,15 +3,11 @@ class Form
   attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :address, :building, :phone_number, :token, :price
 
   with_options presence: true do
-    #with_options foreign_key: true do
-      validates :user_id
-      validates :item_id
-    #end
-    validates :postal_code
-    validates :prefecture_id
-    validates :city
-    validates :address
-    validates :phone_number
+    validates :postal_code, format: {with: /\A\d{3}[-]\d{4}\z/}
+    validates :prefecture_id, numericality: { other_than: 1 }
+    validates :city, format: {with: /\A[ぁ-んァ-ン一-龥々]/}
+    validates :address, format: {with: /\A[ぁ-んァ-ン一-龥々1-9]/}
+    validates :phone_number, format: {with: /\A[0-9]+\z/}
     validates :token
   end
 
