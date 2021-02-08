@@ -64,7 +64,16 @@ RSpec.describe Form, type: :model do
       @form.valid?
       expect(@form.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
     end
-
+    it "user_idがないと保存できない" do
+      @form.user_id = ""
+      @form.valid?
+      expect(@form.errors.full_messages).to include("User can't be blank")
+    end
+    it "item_idがないと保存できない" do
+      @form.item_id = ""
+      @form.valid?
+      expect(@form.errors.full_messages).to include("Item can't be blank")
+    end
   end
 
   context "購入記録が保存できる時" do
