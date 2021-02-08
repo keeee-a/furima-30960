@@ -9,6 +9,8 @@ class Form
     validates :address, format: {with: /\A[ぁ-んァ-ン一-龥々1-9]/}
     validates :phone_number, format: {with: /\A[0-9]+\z/}, length: {maximum: 11}
     validates :token
+    validates :user_id
+    validates :item_id
   end
 
   def save

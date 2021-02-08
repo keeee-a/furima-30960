@@ -60,7 +60,7 @@ class ItemsController < ApplicationController
   end
 
   def item_sold_out?
-    unless Purchase.find_by(item_id: @item.id).blank?
+    unless @item.purchase.blank?
       redirect_to controller: :items, action: :index
     end
   end

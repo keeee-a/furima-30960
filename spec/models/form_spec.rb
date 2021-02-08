@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Form, type: :model do
   before do
-    @form = FactoryBot.build(:form)
+    @user = FactoryBot.build(:user)
+    @item = FactoryBot.build(:item)
+    @form = FactoryBot.build(:form, user_id: @user.id, item_id: @item.id)
   end
   
   context "購入記録が保存できない時" do
@@ -91,6 +93,10 @@ RSpec.describe Form, type: :model do
     end
     it "電話番号が十一桁以内であれば保存できる" do
       @form.phone_number = "09012345678"
+      expect(@form).to be_valid
+    end
+    it "建物名が空でも保存できる" do
+      @form.building = ""
       expect(@form).to be_valid
     end
   end
