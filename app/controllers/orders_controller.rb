@@ -3,6 +3,7 @@ class OrdersController < ApplicationController
   def index
     set_item
     my_product?
+    item_sold_out?
     @form = Form.new
   end
 
@@ -41,6 +42,12 @@ class OrdersController < ApplicationController
       card: form_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def item_sold_out?
+    unless Purchase.find_by(item_id: @item.id).blank?
+      redirect_to controller: :items, action: :index
+    end
   end
 
 end
