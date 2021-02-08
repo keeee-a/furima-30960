@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
   before_action :redirect_to_index, only: [:edit, :destroy]
+  before_action :item_sold_out?, only: [:edit]
   
   def index
     @items = Item.all.order(created_at: "DESC")
@@ -58,4 +59,9 @@ class ItemsController < ApplicationController
     end
   end
 
+  def item_sold_out?
+    unless @item.purchase.blank?
+      redirect_to controller: :items, action: :index
+    end
+  end
 end
